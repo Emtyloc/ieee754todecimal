@@ -1,7 +1,11 @@
 const display = document.querySelector("#display");
 const buttons = document.querySelectorAll("button");
 const clearButton = document.querySelector('.clear-icon');
-
+const norm = document.querySelector('#norm');
+const sign = document.querySelector('#sign');
+const expo = document.querySelector('#expo');
+const mant = document.querySelector('#mant');
+const calc = document.querySelector('#calc');
 buttons.forEach((item) => {
     item.onclick = () => {
         if (item.innerText == '0') item.innerText = '1';
@@ -10,7 +14,11 @@ buttons.forEach((item) => {
         //Actualizamos el signo
         if (buttons[0].innerText == '0'){
             displayText.push('+ ');
-        }else displayText.push('- ');
+            sign.innerText = "+";
+        }else{
+            displayText.push('- ');
+            sign.innerText = "-";
+        }
         //Actualizamos el exponente
         let exp = [];
         for (let i = 1; i < 9; i++){
@@ -28,16 +36,23 @@ buttons.forEach((item) => {
             for (let i = 0; i < mantissa.length; i++){
                 result += parseInt(mantissa[i],10) * 2**(-(i+1));
             }
+            mant.innerText = "\\("+result.toFixed(5).toString()+"\\)...";
+            calc.innerHTML = "\\(2^{-126}*"+result.toFixed(5).toString()+"\\)..."
             result = result*(2**(-126));
             displayText.push(result.toString());
+            norm.innerText = "denormalized";
+            expo.innerHTML = "\\(2^{-126}\\)";
         }
         /*CERO*/
         else if (exp.join('') == '00000000' && mantissa.join('') == '00000000000000000000000'){
             displayText.push('0');
+            norm.innerText = "zero";
+            mant.innerText = "\\(0\\)";
         }
         /*INFINITO*/
         else if (exp.join('') == '11111111' && mantissa.join('') == '00000000000000000000000'){
             displayText.push(" ∞");
+            norm.innerText = "infinity";
         }
         /*NaN*/
         else if (exp.join('') == '11111111' && mantissa.join('') != '00000000000000000000000'){
@@ -50,10 +65,18 @@ buttons.forEach((item) => {
             for (let i = 0; i < mantissa.length; i++){
                 result += parseInt(mantissa[i],10)*2**(-(i+1));
             }
+            mant.innerText = "\\(1+"+(result-1).toFixed(5).toString()+"\\)...";
+            let ex = parseInt(exp.join(''),2)-127
+            calc.innerHTML = "\\(2^{"+ex+"}*"+result.toFixed(5)+"\\)...";
             result = result*(2**(parseInt(exp.join(''),2)-127));
             displayText.push(result.toString());
+            norm.innerText = "normalized";
+            expo.innerHTML = "\\(2^{"+ex+"}\\)";
+            
+            
         }
         display.innerText = displayText.join("");
+        MathJax.typeset();
     }
 })
 
@@ -70,6 +93,11 @@ themeToggleBtn.onclick = () => {
 clearButton.onclick = () => {
     buttons.forEach((item) => {
         item.innerText = '0';
-        display.innerText = '+ 0';
     })
+    display.innerText = '+ 0';
+    norm.innerText = "zero";
+    mant.innerText = "\\(0\\)";
+    expo.innerText = "\\(0\\)";
+    calc.innerHTML = "\\(0\\)";
+    MathJax.typeset();
 }

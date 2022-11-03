@@ -5,11 +5,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <title>IEEE-754 to decimal</title>
     </head>
     <body>
         <h1>IEEE-754 to decimal</h1>
-        <div class="container">
+        <div class="container" style="overflow-x:auto;">
             <div class="calculator dark">
                 <div class="theme-toggler active">
                     <i class="toggler-icon"></i>
@@ -62,6 +64,27 @@
                 </div>
             </div>
         </div>
+        <div class="mathbehind" style="overflow-x:auto;">
+            <table id="result-table">
+                <th>norm</th>
+                <th>sign</th>
+                <th>exponent</th>
+                <th>mantissa</th>
+                <th> = </th>
+                <tr>
+                    <td id="norm">zero</td>
+                    <td id="sign">+</td>
+                    <td id="expo">0</td>
+                    <td id="mant">0</td>
+                    <td id="calc">0</td>
+                </tr>
+            </table>
+        </div>
+        <h2 id="how_work">What are those 32 bits?</h2>
+        <p>First, there are 3 main parts of the binary flotal number of above:</p>
+        <p>1.- Sign bit, the left first bit of the number: 0 for positive, 1 for negative.</p>
+        <p>2.- Exponent, the 8 next bits, purple color, this goes from 0 to 255.</p>
+        <p>3.- Fractionary part, also known as Mantissa, this value is a little more complicated because depends on the Exponent, and this is a sum of 2^Nbit fractions.</p>
         <script src="script.js"></script>
     </body>
 </html>
