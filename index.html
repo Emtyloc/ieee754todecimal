@@ -81,10 +81,17 @@
             </table>
         </div>
         <h2 id="how_work">What are those 32 bits?</h2>
-        <p>First, there are 3 main parts of the binary flotal number of above:</p>
-        <p>1.- Sign bit, the left first bit of the number: 0 for positive, 1 for negative.</p>
-        <p>2.- Exponent, the 8 next bits, purple color, this goes from 0 to 255.</p>
-        <p>3.- Fractionary part, also known as Mantissa, this value is a little more complicated because depends on the Exponent, and this is a sum of 2^Nbit fractions.</p>
+        <div class="explication-container">
+            <ul class="expUL">
+                <li>First, there are 3 main parts of the binary flotal number of above:</li>
+                <li>Sign bit, the left first bit of the number: 0 for positive, 1 for negative.</li>
+                <li>Exponent, the 8 next bits, purple color, this goes from \(2^{-126}\) to \(2^{127}\).</li>
+                <li>Fractionary part, also known as Mantissa, if the Exponent is equal to 0 is a sum of \({1/2}^n\)<br>
+                    being n the nth bit from left to right, the first bit sum \({1/2}\) the second \({1/4}\) and so on.<br>
+                    If the Exponent is not zero the logic is the same but the sum start from 1.</li>
+                <li>The norm indicates in which of this case we are.</li>
+            </ul>
+        </div>
         <script src="script.js"></script>
     </body>
 </html>

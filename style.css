@@ -59,6 +59,16 @@ h1 {
     color: white;
 }
 
+.explication-container {
+    text-align: center;
+}
+
+ul.expUL {
+    text-align: center;
+    color: white;
+    font-size: large;
+}
+
 .clear-button {
     height: fit-content;
     width: fit-content;
