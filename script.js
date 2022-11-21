@@ -48,16 +48,25 @@ buttons.forEach((item) => {
             displayText.push('0');
             norm.innerText = "zero";
             mant.innerText = "\\(0\\)";
+            expo.innerText = "\\(0\\)";
+            calc.innerText = "\\(0\\)";
         }
         /*INFINITO*/
         else if (exp.join('') == '11111111' && mantissa.join('') == '00000000000000000000000'){
             displayText.push(" ∞");
             norm.innerText = "infinity";
+            mant.innerText = "\\(∞\\)";
+            expo.innerText = "\\(∞\\)";
+            calc.innerText = "\\(∞\\)";
         }
         /*NaN*/
         else if (exp.join('') == '11111111' && mantissa.join('') != '00000000000000000000000'){
             displayText.pop();
             displayText.push( "NaN");
+            norm.innerText = "NaN";
+            mant.innerText = "\\(NaN\\)";
+            expo.innerText = "\\(NaN\\)";
+            calc.innerText = "\\(NaN\\)";
         }
         /*NORMALIZADO*/
         else {
